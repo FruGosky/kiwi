@@ -6,7 +6,7 @@ import { UserButton } from '@clerk/nextjs';
 import { buttonVariants } from '@/components/ui/button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { SvgIcons } from '@/components/SvgIcons';
+import { SvgIcons } from '@/components/icons/SvgIcons';
 import TooltipWrapper from '@/components/TooltipWrapper';
 
 export default function AdminHeader() {

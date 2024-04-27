@@ -1,7 +1,7 @@
 import ThemeToggle from '@/components/ThemeToggle';
 import Nav, { MainNav } from '@/components/Nav';
 import Link from 'next/link';
-import { SvgIcons } from '@/components/SvgIcons';
+import { SvgIcons } from '@/components/icons/SvgIcons';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { navPaths } from '@/config/availablePaths';
