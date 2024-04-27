@@ -1,19 +1,34 @@
-type TPath = {
-	title: string;
-	href: string;
-};
+import { TNavPath } from '@/components/Nav';
 
-export const navPaths: TPath[] = [
-	{
-		title: 'Home',
-		href: '/',
-	},
-	{
-		title: 'Products',
-		href: '/products',
-	},
-	{
-		title: 'Orders',
-		href: '/orders',
-	},
-];
+type TAvailableSites = 'storeFront' | 'admin';
+
+export const navPaths: Record<TAvailableSites, TNavPath[]> = {
+	storeFront: [
+		{
+			title: 'Home',
+			href: '/',
+		},
+		{
+			title: 'Products',
+			href: '/products',
+		},
+		{
+			title: 'Orders',
+			href: '/orders',
+		},
+	],
+	admin: [
+		{
+			title: 'Home',
+			href: '/admin',
+		},
+		{
+			title: 'Products',
+			href: '/admin/products',
+		},
+		{
+			title: 'Orders',
+			href: '/admin/orders',
+		},
+	],
+};

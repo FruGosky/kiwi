@@ -1,9 +1,15 @@
+import { navPaths } from '@/config/availablePaths';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ComponentProps, DetailedHTMLProps, HTMLAttributes } from 'react';
+import {
+	ComponentProps,
+	DetailedHTMLProps,
+	HTMLAttributes,
+	ReactNode,
+} from 'react';
 
-type TLinkProps = Omit<ComponentProps<typeof Link>, 'href' | 'children'>;
+type TLinkProps = Omit<Partial<ComponentProps<typeof Link>>, 'children'>;
 
 type TImageProps = Omit<
 	ComponentProps<typeof Image>,
@@ -19,16 +25,18 @@ type TLogoProps = {
 	linkProps?: TLinkProps;
 	imageProps?: TImageProps;
 	spanProps?: TSpanProps;
+	children?: ReactNode;
 };
 
 export default function Logo({
-	linkProps: { className: linkClassName, ...restLinkProps } = {},
+	linkProps: { className: linkClassName, href, ...restLinkProps } = {},
 	imageProps,
 	spanProps: { className: spanClassName, ...restSpanProps } = {},
+	children,
 }: TLogoProps) {
 	return (
 		<Link
-			href="/"
+			href={href ?? navPaths.storeFront[0].href}
 			className={cn('me-6 flex items-center gap-2', linkClassName)}
 			{...restLinkProps}
 		>
@@ -43,7 +51,7 @@ export default function Logo({
 				className={cn('font-bold text-primary', spanClassName)}
 				{...restSpanProps}
 			>
-				Kiwi
+				{children ?? 'Kiwi'}
 			</span>
 		</Link>
 	);

@@ -1,16 +1,16 @@
 import Footer from '@/components/Footer';
-import StoreFrontHeader from '@/app/(storeFront)/_components/StoreFrontHeader';
+import AdminHeader from '@/app/admin/_components/AdminHeader';
 import { ReactNode } from 'react';
 import Main from '@/components/Main';
 
-type TStoreFrontLayoutProps = {
+type TAdminLayoutProps = {
 	children: ReactNode;
 };
 
-export default function StoreFrontLayout(props: TStoreFrontLayoutProps) {
+export default function AdminLayout(props: TAdminLayoutProps) {
 	return (
 		<>
-			<StoreFrontHeader />
+			<AdminHeader />
 			<Main>{props.children}</Main>
 			<Footer />
 		</>

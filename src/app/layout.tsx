@@ -3,6 +3,7 @@ import { Inter as FontSans } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import '@/styles/globals.css';
 import { ThemeProvider } from 'next-themes';
+import ClerkWrapper from '@/components/ClerkWrapper';
 
 const fontSans = FontSans({
 	subsets: ['latin'],
@@ -36,9 +37,11 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<div className="relative flex min-h-screen flex-col bg-background">
-						{children}
-					</div>
+					<ClerkWrapper>
+						<div className="relative flex min-h-screen flex-col bg-background">
+							{children}
+						</div>
+					</ClerkWrapper>
 				</ThemeProvider>
 			</body>
 		</html>

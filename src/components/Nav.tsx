@@ -9,6 +9,24 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ComponentProps, DetailedHTMLProps, HTMLAttributes } from 'react';
 
+export type TNavPath = { title: string; href: string };
+
+type TMainNavProps = {
+	navPaths: TNavPath[];
+};
+
+export function MainNav({ navPaths }: TMainNavProps) {
+	return (
+		<Nav>
+			{navPaths.map((navPath) => (
+				<NavLink key={navPath.href} href={navPath.href}>
+					{navPath.title}
+				</NavLink>
+			))}
+		</Nav>
+	);
+}
+
 type TNavProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
 
 export default function Nav({ className, children, ...props }: TNavProps) {
