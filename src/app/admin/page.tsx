@@ -5,14 +5,14 @@ import AdminPageName from './_components/AdminPageName';
 import { Metadata } from 'next';
 
 const getSales = async () => {
-	const productData = await db.product.aggregate({
+	const orderData = await db.order.aggregate({
 		_sum: { priceInCents: true },
 		_count: true,
 	});
 
 	return {
-		totalOrders: productData._count,
-		totalEarnings: (productData._sum.priceInCents || 0) / 100,
+		totalOrders: orderData._count,
+		totalEarnings: (orderData._sum.priceInCents || 0) / 100,
 	};
 };
 
