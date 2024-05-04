@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { HTMLAttributes } from 'react';
 
-type TSvgIconProps = HTMLAttributes<SVGElement>;
+export type TSvgIconProps = HTMLAttributes<SVGElement>;
 
 const defaultIconClassName: TSvgIconProps['className'] = 'h-4 w-4';
 

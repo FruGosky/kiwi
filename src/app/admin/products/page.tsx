@@ -13,8 +13,14 @@ import {
 import Toolbar from '@/components/Toolbar';
 import Link from 'next/link';
 import db from '@/db/db';
-import { dateFormatter, formatCurrency, formatNumber } from '@/lib/formatters';
+import {
+	dateFormatter,
+	dateTimeFormatter,
+	formatCurrency,
+	formatNumber,
+} from '@/lib/formatters';
 import AvailabilityIcon from '@/components/icons/AvailabilityIcon';
+import ProductDropdownActions from './_components/ProductDropdownActions';
 
 const getProducts = async () => {
 	const productsData = await db.product.findMany({
@@ -24,6 +30,7 @@ const getProducts = async () => {
 			priceInCents: true,
 			isAvailableForPurchase: true,
 			createdAt: true,
+			updatedAt: true,
 			_count: { select: { orders: true } },
 		},
 		orderBy: {
@@ -60,11 +67,14 @@ export default async function AdminProductsPage() {
 								Available For Purchase
 							</span>
 						</TableHead>
-						<TableHead className="w-0">ID</TableHead>
 						<TableHead>Name</TableHead>
 						<TableHead>Price</TableHead>
-						<TableHead>Created At</TableHead>
 						<TableHead>Total Orders</TableHead>
+						<TableHead>Created At</TableHead>
+						<TableHead>Updated At</TableHead>
+						<TableHead className="w-0">
+							<span className="sr-only">Actions</span>
+						</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -75,16 +85,26 @@ export default async function AdminProductsPage() {
 									isAvailable={product.isAvailableForPurchase}
 								/>
 							</TableCell>
-							<TableCell>{product.id}</TableCell>
 							<TableCell>{product.name}</TableCell>
 							<TableCell>
 								{formatCurrency(product.priceInCents / 100)}
 							</TableCell>
 							<TableCell>
+								{formatNumber(product._count.orders)}
+							</TableCell>
+							<TableCell>
 								{dateFormatter().format(product.createdAt)}
 							</TableCell>
 							<TableCell>
-								{formatNumber(product._count.orders)}
+								{dateTimeFormatter().format(product.updatedAt)}
+							</TableCell>
+							<TableCell>
+								<ProductDropdownActions
+									id={product.id}
+									isAvailableForPurchase={
+										product.isAvailableForPurchase
+									}
+								/>
 							</TableCell>
 						</TableRow>
 					))}

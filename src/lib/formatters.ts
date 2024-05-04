@@ -14,14 +14,15 @@ export const formatNumber = (amount: number) => {
 	return NUMBER_FORMATTER.format(amount);
 };
 
-export const dateFormatter = (
-	locales?: Intl.LocalesArgument,
-	options?: Intl.DateTimeFormatOptions,
-) => {
-	return new Intl.DateTimeFormat(
-		locales ?? 'en',
-		options ?? {
-			dateStyle: 'long',
-		},
-	);
+export const dateFormatter = () => {
+	return new Intl.DateTimeFormat('en', {
+		dateStyle: 'long',
+	});
+};
+
+export const dateTimeFormatter = () => {
+	return new Intl.DateTimeFormat('en', {
+		dateStyle: 'long',
+		timeStyle: 'medium',
+	});
 };
