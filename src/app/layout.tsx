@@ -23,7 +23,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
-				<link rel="icon" href="./kiwi-logo.png" />
+				<link rel="icon" href="/kiwi-logo.png" />
 			</head>
 			<body
 				className={cn(
