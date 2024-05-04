@@ -46,10 +46,10 @@ const getProducts = async () => {
 	return { activeProducts, inactiveProducts };
 };
 
-const pageName = 'Admin Dashboard';
+const pageName = 'Dashboard';
 
 export const metadata: Metadata = {
-	title: `Kiwi - ${pageName}`,
+	title: `Kiwi - Admin - ${pageName}`,
 };
 
 export default async function AdminHomePage() {

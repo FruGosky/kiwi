@@ -34,10 +34,10 @@ const getProducts = async () => {
 	return productsData;
 };
 
-const pageName = 'Admin Products';
+const pageName = 'Products';
 
 export const metadata: Metadata = {
-	title: `Kiwi - ${pageName}`,
+	title: `Kiwi - Admin - ${pageName}`,
 };
 
 export default async function AdminProductsPage() {
