@@ -1,4 +1,9 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import {
+	clerkClient,
+	clerkMiddleware,
+	createRouteMatcher,
+} from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
 
 const isProtectedRoute = createRouteMatcher([
 	'/admin(.*)',
@@ -6,25 +11,41 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 const isAdminRoute = createRouteMatcher(['/admin(.*)']);
 
-export default clerkMiddleware((auth, req) => {
-	if (!isProtectedRoute(req)) return;
+const rolesAllowedToAdminRoutes = ['admin'];
+
+const redirectNoPermissions = (url: string) => {
+	const redirectUrl = new URL('/', url);
+	redirectUrl.searchParams.append(
+		'alertMessage',
+		"You don't have permission to admin route!",
+	);
+	return NextResponse.redirect(redirectUrl);
+};
+
+export default clerkMiddleware(async (auth, req) => {
+	if (!isProtectedRoute(req)) return NextResponse.next();
+
+	if (!isAdminRoute(req)) {
+		throw new Error(`Unhandled route for '${req.url}'`);
+	}
 
 	const { userId } = auth();
 
-	if (isAdminRoute(req)) {
-		if (!userId) {
-			auth().protect();
-			return;
-		}
-
-		// TODO Add roles in future
-		// if (!has({ role: 'admin' })) {
-		// 	auth().protect();
-		// 	return;
-		// }
+	if (!userId) {
+		auth().protect();
+		return NextResponse.next();
 	}
 
-	auth().protect();
+	const userData = await clerkClient.users.getUser(userId);
+
+	const userRole = userData.privateMetadata['role'];
+	if (typeof userRole !== 'string') {
+		return redirectNoPermissions(req.url);
+	}
+
+	if (!rolesAllowedToAdminRoutes.includes(userRole)) {
+		return redirectNoPermissions(req.url);
+	}
 });
 
 export const config = {

@@ -1,8 +1,18 @@
-export default function Home() {
+import ErrorAlert from '@/components/ErrorAlert';
+
+type THomeProps = {
+	searchParams?: {
+		alertMessage?: string;
+	};
+};
+
+export default function Home({ searchParams }: THomeProps) {
 	return (
 		<>
-			<></>
-			Home Page!
+			{searchParams?.alertMessage ? (
+				<ErrorAlert message={searchParams.alertMessage} />
+			) : null}
+			<h1>Home Page!</h1>
 		</>
 	);
 }
