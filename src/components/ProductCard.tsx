@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { formatCurrency } from '@/lib/formatters';
 import { Button } from './ui/button';
 import {
 	Card,
@@ -8,8 +10,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from './ui/card';
-import Image from 'next/image';
-import { formatCurrency } from '@/lib/formatters';
 
 type TProductCardProps = {
 	id: string;
@@ -19,31 +19,35 @@ type TProductCardProps = {
 	imagePath: string;
 };
 
-export default function ProductCard(props: TProductCardProps) {
+export default function ProductCard({
+	id,
+	name,
+	priceInCents,
+	description,
+	imagePath,
+}: TProductCardProps) {
 	return (
 		<Card className="flex flex-col overflow-hidden">
 			<div className="relative aspect-video h-auto w-full bg-secondary">
 				<Image
-					src={props.imagePath}
-					alt={props.name}
-					layout={'fill'}
-					objectFit={'contain'}
+					src={imagePath}
+					alt={name}
+					layout="fill"
+					objectFit="contain"
 				/>
 			</div>
 			<CardHeader>
-				<CardTitle>{props.name}</CardTitle>
+				<CardTitle>{name}</CardTitle>
 				<CardDescription>
-					{formatCurrency(props.priceInCents / 100)}
+					{formatCurrency(priceInCents / 100)}
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="flex flex-grow text-muted-foreground">
-				<p className="line-clamp-4">{props.description}</p>
+				<p className="line-clamp-4">{description}</p>
 			</CardContent>
 			<CardFooter>
 				<Button asChild size="lg" className="w-full">
-					<Link href={`/products/${props.id}/purchase`}>
-						Purchase
-					</Link>
+					<Link href={`/products/${id}/purchase`}>Purchase</Link>
 				</Button>
 			</CardFooter>
 		</Card>
