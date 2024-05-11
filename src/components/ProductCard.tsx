@@ -32,8 +32,8 @@ export default function ProductCard({
 				<Image
 					src={imagePath}
 					alt={name}
-					layout="fill"
-					objectFit="contain"
+					fill
+					style={{ objectFit: 'contain' }}
 				/>
 			</div>
 			<CardHeader>
