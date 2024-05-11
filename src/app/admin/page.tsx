@@ -2,6 +2,9 @@ import DashboardCard from '@/components/DashboardCard';
 import db from '@/db/db';
 import { formatCurrency, formatNumber } from '@/lib/formatters';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import { randomUUID } from 'crypto';
+import AdminDashboardCardSkeleton from '@/components/skeletons/AdminDashboardCardSkeleton';
 import AdminPageName from './_components/AdminPageName';
 
 const getSales = async () => {
@@ -52,7 +55,26 @@ export const metadata: Metadata = {
 	title: `Kiwi - Admin - ${pageName}`,
 };
 
-export default async function AdminHomePage() {
+export default function AdminHomePage() {
+	return (
+		<>
+			<AdminPageName>{pageName}</AdminPageName>
+			<Suspense
+				fallback={
+					<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+						{Array.from({ length: 3 }).map(() => (
+							<AdminDashboardCardSkeleton key={randomUUID()} />
+						))}
+					</div>
+				}
+			>
+				<DashboardCards />
+			</Suspense>
+		</>
+	);
+}
+
+async function DashboardCards() {
 	const [
 		{ totalEarnings, totalOrders },
 		{ customerCount, valuePerUser },
@@ -60,25 +82,22 @@ export default async function AdminHomePage() {
 	] = await Promise.all([getSales(), getCustomers(), getProducts()]);
 
 	return (
-		<>
-			<AdminPageName>{pageName}</AdminPageName>
-			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-				<DashboardCard
-					title="Sales"
-					description={`Total Orders: ${formatNumber(totalOrders)}`}
-					content={formatCurrency(totalEarnings)}
-				/>
-				<DashboardCard
-					title="Customers"
-					description={`Average value per user: ${formatCurrency(valuePerUser)}`}
-					content={formatNumber(customerCount)}
-				/>
-				<DashboardCard
-					title="Active Products"
-					description={`Inactive products: ${formatNumber(inactiveProducts)}`}
-					content={formatNumber(activeProducts)}
-				/>
-			</div>
-		</>
+		<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+			<DashboardCard
+				title="Sales"
+				description={`Total Orders: ${formatNumber(totalOrders)}`}
+				content={formatCurrency(totalEarnings)}
+			/>
+			<DashboardCard
+				title="Customers"
+				description={`Average value per user: ${formatCurrency(valuePerUser)}`}
+				content={formatNumber(customerCount)}
+			/>
+			<DashboardCard
+				title="Active Products"
+				description={`Inactive products: ${formatNumber(inactiveProducts)}`}
+				content={formatNumber(activeProducts)}
+			/>
+		</div>
 	);
 }
