@@ -25,6 +25,7 @@ export default function AdminProductRowSkeleton() {
 			<TableCell>
 				<Skeleton className="h-6 w-6" />
 			</TableCell>
+			<span className="sr-only">Product row loading</span>
 		</TableRow>
 	);
 }
