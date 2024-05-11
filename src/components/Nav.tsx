@@ -1,13 +1,6 @@
-'use client';
-
 import { cn } from '@/lib/utils';
-import {
-	hoverAndConditionAnimation,
-	hoverUnderscoreAnimation,
-} from '@/styles/animations';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { ComponentProps, DetailedHTMLProps, HTMLAttributes } from 'react';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { NavLink } from './buttons/NavLink';
 
 export type TNavPath = { title: string; href: string };
 
@@ -37,24 +30,5 @@ export default function Nav({ className, children, ...props }: TNavProps) {
 		>
 			{children}
 		</nav>
-	);
-}
-
-type TNavLinkProps = ComponentProps<typeof Link>;
-
-export function NavLink({ className, children, ...props }: TNavLinkProps) {
-	const pathname = usePathname();
-
-	return (
-		<Link
-			{...props}
-			className={cn(
-				hoverAndConditionAnimation(pathname === props.href),
-				hoverUnderscoreAnimation(),
-				className,
-			)}
-		>
-			{children}
-		</Link>
 	);
 }

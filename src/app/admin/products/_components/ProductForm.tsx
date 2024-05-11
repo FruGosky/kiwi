@@ -7,7 +7,7 @@ import { formatCurrency } from '@/lib/formatters';
 import { useState } from 'react';
 import { Product } from '@prisma/client';
 import Image from 'next/image';
-import SubmitButton from '@/components/SubmitButton';
+import SubmitButton from '@/components/buttons/SubmitButton';
 import { useFormState } from 'react-dom';
 import { addProduct, editProduct } from '../../_actions/products';
 

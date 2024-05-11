@@ -1,4 +1,5 @@
-import ProductCard, { ProductCardSkeleton } from '@/components/ProductCard';
+import ProductCard from '@/components/ProductCard';
+import { ProductCardSkeleton } from '@/components/skeletons/ProductCardSkeleton';
 import db from '@/db/db';
 import { randomUUID } from 'crypto';
 import { Suspense } from 'react';

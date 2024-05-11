@@ -5,14 +5,14 @@ import {
 	SignInButton,
 	UserButton,
 } from '@clerk/nextjs';
-import { Skeleton } from './ui/skeleton';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
+import UserIconSkeleton from '../skeletons/UserIconSkeleton';
 
 export default function UserIcon() {
 	return (
 		<div className="flex h-7 w-7 items-center">
 			<ClerkLoading>
-				<Skeleton className="h-7 w-7 rounded-full" />
+				<UserIconSkeleton />
 			</ClerkLoading>
 			<SignedIn>
 				<UserButton />

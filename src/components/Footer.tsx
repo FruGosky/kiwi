@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import GithubLink from './buttons/GithubLink';
 
 export default function Footer() {
 	return (
@@ -13,16 +13,7 @@ export default function Footer() {
 function CreationInfo() {
 	return (
 		<p className="text-balance text-center text-sm text-muted-foreground md:text-left">
-			Page created by{' '}
-			<Link
-				href="https://github.com/FruGosky"
-				target="_blank"
-				className="font-medium underline"
-				rel="noreferrer"
-			>
-				FruGosky
-			</Link>
-			.
+			Page created by <GithubLink />.
 		</p>
 	);
 }

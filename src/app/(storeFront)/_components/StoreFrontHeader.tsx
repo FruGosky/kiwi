@@ -1,13 +1,9 @@
-import ThemeToggle from '@/components/ThemeToggle';
+import ThemeToggle from '@/components/buttons/ThemeToggle';
 import Nav, { MainNav } from '@/components/Nav';
-import Link from 'next/link';
-import { SvgIcons } from '@/components/icons/SvgIcons';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { navPaths } from '@/config/availablePaths';
-import Logo from '@/components/Logo';
-import TooltipWrapper from '@/components/TooltipWrapper';
-import UserIcon from '@/components/UserIcon';
+import Logo from '@/components/buttons/Logo';
+import UserIcon from '@/components/buttons/UserIcon';
+import GithubButton from '@/components/buttons/GithubButton';
 
 export default function StoreFrontHeader() {
 	return (
@@ -28,28 +24,11 @@ export default function StoreFrontHeader() {
 function NavigationToolbox() {
 	return (
 		<Nav className="items-center gap-0">
-			<GithubIcon />
+			<GithubButton />
 			<ThemeToggle />
 			<div className="ms-2 flex">
 				<UserIcon />
 			</div>
 		</Nav>
-	);
-}
-
-function GithubIcon() {
-	return (
-		<TooltipWrapper text="GitHub">
-			<Link
-				href="https://github.com/FruGosky"
-				target="_blank"
-				rel="noreferrer"
-				className={cn(
-					buttonVariants({ variant: 'ghost', size: 'icon' }),
-				)}
-			>
-				<SvgIcons.github />
-			</Link>
-		</TooltipWrapper>
 	);
 }

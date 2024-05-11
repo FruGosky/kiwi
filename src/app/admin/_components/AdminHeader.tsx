@@ -1,25 +1,16 @@
-import ThemeToggle from '@/components/ThemeToggle';
+import ThemeToggle from '@/components/buttons/ThemeToggle';
 import Nav, { MainNav } from '@/components/Nav';
 import { navPaths } from '@/config/availablePaths';
-import Logo from '@/components/Logo';
 import { UserButton } from '@clerk/nextjs';
-import { buttonVariants } from '@/components/ui/button';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { SvgIcons } from '@/components/icons/SvgIcons';
-import TooltipWrapper from '@/components/TooltipWrapper';
+import Logo from '@/components/buttons/Logo';
+import StoreFrontButton from '@/components/buttons/StoreFrontButton';
 
 export default function AdminHeader() {
 	return (
 		<header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
 			<div className="container flex h-14 max-w-screen-2xl items-center">
 				<div className="mr-4 hidden md:flex">
-					<Logo
-						linkProps={{ href: '/admin' }}
-						spanProps={{ className: 'text-destructive' }}
-					>
-						Kiwi Admin
-					</Logo>
+					<AdminLogo />
 					<MainNav navPaths={navPaths.admin} />
 				</div>
 				<div className="flex flex-1 items-center justify-end gap-2">
@@ -30,30 +21,25 @@ export default function AdminHeader() {
 	);
 }
 
+function AdminLogo() {
+	return (
+		<Logo
+			linkProps={{ href: '/admin' }}
+			spanProps={{ className: 'text-destructive' }}
+		>
+			Kiwi Admin
+		</Logo>
+	);
+}
+
 function NavigationToolbox() {
 	return (
 		<Nav className="items-center gap-0">
-			<StoreFrontIcon />
+			<StoreFrontButton />
 			<ThemeToggle />
 			<div className="ms-2 flex">
 				<UserButton />
 			</div>
 		</Nav>
-	);
-}
-
-function StoreFrontIcon() {
-	return (
-		<TooltipWrapper text="Back to Store Front">
-			<Link
-				href={navPaths.storeFront[0].href}
-				rel="noreferrer"
-				className={cn(
-					buttonVariants({ variant: 'ghost', size: 'icon' }),
-				)}
-			>
-				<SvgIcons.storeFront />
-			</Link>
-		</TooltipWrapper>
 	);
 }

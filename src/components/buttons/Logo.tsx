@@ -53,6 +53,7 @@ export default function Logo({
 			>
 				{children ?? 'Kiwi'}
 			</span>
+			<span className="sr-only">Logo</span>
 		</Link>
 	);
 }
