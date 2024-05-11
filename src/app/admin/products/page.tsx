@@ -19,6 +19,9 @@ import {
 	formatNumber,
 } from '@/lib/formatters';
 import AvailabilityIcon from '@/components/icons/AvailabilityIcon';
+import { Suspense } from 'react';
+import { randomUUID } from 'crypto';
+import AdminProductRowSkeleton from '@/components/skeletons/AdminProductRowSkeleton';
 import AdminPageName from '../_components/AdminPageName';
 import ProductDropdownActions from './_components/ProductDropdownActions';
 
@@ -47,9 +50,7 @@ export const metadata: Metadata = {
 	title: `Kiwi - Admin - ${pageName}`,
 };
 
-export default async function AdminProductsPage() {
-	const products = await getProducts();
-
+export default function AdminProductsPage() {
 	return (
 		<>
 			<AdminPageName>{pageName}</AdminPageName>
@@ -58,58 +59,66 @@ export default async function AdminProductsPage() {
 					<Link href="/admin/products/add">Add Product</Link>
 				</Button>
 			</Toolbar>
-			<Table>
-				<TableCaption>A list of all products.</TableCaption>
-				<TableHeader>
-					<TableRow>
-						<TableHead className="w-0">
-							<span className="sr-only">
-								Available For Purchase
-							</span>
-						</TableHead>
-						<TableHead>Name</TableHead>
-						<TableHead>Price</TableHead>
-						<TableHead>Total Orders</TableHead>
-						<TableHead>Created At</TableHead>
-						<TableHead>Updated At</TableHead>
-						<TableHead className="w-0">
-							<span className="sr-only">Actions</span>
-						</TableHead>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					{products.map((product) => (
-						<TableRow key={product.id}>
-							<TableCell>
-								<AvailabilityIcon
-									isAvailable={product.isAvailableForPurchase}
-								/>
-							</TableCell>
-							<TableCell>{product.name}</TableCell>
-							<TableCell>
-								{formatCurrency(product.priceInCents / 100)}
-							</TableCell>
-							<TableCell>
-								{formatNumber(product._count.orders)}
-							</TableCell>
-							<TableCell>
-								{dateFormatter().format(product.createdAt)}
-							</TableCell>
-							<TableCell>
-								{dateTimeFormatter().format(product.updatedAt)}
-							</TableCell>
-							<TableCell>
-								<ProductDropdownActions
-									id={product.id}
-									isAvailableForPurchase={
-										product.isAvailableForPurchase
-									}
-								/>
-							</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
+			<ProductsTable />
 		</>
 	);
+}
+
+function ProductsTable() {
+	return (
+		<Table>
+			<TableHeader>
+				<TableRow>
+					<TableHead className="w-0">
+						<span className="sr-only">Available For Purchase</span>
+					</TableHead>
+					<TableHead>Name</TableHead>
+					<TableHead>Price</TableHead>
+					<TableHead>Total Orders</TableHead>
+					<TableHead>Created At</TableHead>
+					<TableHead>Updated At</TableHead>
+					<TableHead className="w-0">
+						<span className="sr-only">Actions</span>
+					</TableHead>
+				</TableRow>
+			</TableHeader>
+			<TableBody>
+				<Suspense
+					fallback={Array.from({ length: 10 }).map(() => (
+						<AdminProductRowSkeleton key={randomUUID()} />
+					))}
+				>
+					<TableBodyFeed />
+				</Suspense>
+			</TableBody>
+			<TableCaption>A list of all products.</TableCaption>
+		</Table>
+	);
+}
+
+async function TableBodyFeed() {
+	const products = await getProducts();
+
+	return products.map((product) => (
+		<TableRow key={product.id}>
+			<TableCell>
+				<AvailabilityIcon
+					isAvailable={product.isAvailableForPurchase}
+				/>
+			</TableCell>
+			<TableCell>{product.name}</TableCell>
+			<TableCell>{formatCurrency(product.priceInCents / 100)}</TableCell>
+			<TableCell>{formatNumber(product._count.orders)}</TableCell>
+			<TableCell>{dateFormatter().format(product.createdAt)}</TableCell>
+			<TableCell>
+				{dateTimeFormatter().format(product.updatedAt)}
+			</TableCell>
+			<TableCell>
+				<ProductDropdownActions
+					id={product.id}
+					isAvailableForPurchase={product.isAvailableForPurchase}
+				/>
+			</TableCell>
+		</TableRow>
+	));
 }
