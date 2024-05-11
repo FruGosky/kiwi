@@ -1,9 +1,9 @@
 import ThemeToggle from '@/components/buttons/ThemeToggle';
 import Nav, { MainNav } from '@/components/Nav';
 import { navPaths } from '@/config/availablePaths';
-import { UserButton } from '@clerk/nextjs';
 import Logo from '@/components/buttons/Logo';
 import StoreFrontButton from '@/components/buttons/StoreFrontButton';
+import UserIcon from '@/components/buttons/UserIcon';
 
 export default function AdminHeader() {
 	return (
@@ -37,9 +37,7 @@ function NavigationToolbox() {
 		<Nav className="items-center gap-0">
 			<StoreFrontButton />
 			<ThemeToggle />
-			<div className="ms-2 flex">
-				<UserButton />
-			</div>
+			<UserIcon />
 		</Nav>
 	);
 }
