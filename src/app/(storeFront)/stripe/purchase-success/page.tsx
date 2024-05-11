@@ -42,7 +42,7 @@ export default async function PurchaseSuccessPage({
 						src={product.imagePath}
 						alt={product.name}
 						fill
-						className="object-cover"
+						style={{ objectFit: 'scale-down' }}
 					/>
 				</div>
 				<div>

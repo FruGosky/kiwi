@@ -17,7 +17,7 @@ export default function ProductPreview({
 					src={imagePath}
 					alt={name}
 					fill
-					className="object-cover"
+					style={{ objectFit: 'scale-down' }}
 				/>
 			</div>
 			<div>
