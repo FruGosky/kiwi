@@ -20,6 +20,7 @@ import {
 	useStripe,
 } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { useTheme } from 'next-themes';
 import { FormEvent, useState } from 'react';
 
 type TProductPaymentCardProps = {
@@ -35,11 +36,13 @@ export default function ProductPaymentCard({
 	clientSecret,
 	product,
 }: TProductPaymentCardProps) {
+	const { theme } = useTheme();
+
 	return (
 		<Elements
 			options={{
 				clientSecret,
-				appearance: { theme: 'night' },
+				appearance: { theme: theme === 'dark' ? 'night' : 'stripe' },
 			}}
 			stripe={stripePromise}
 		>
