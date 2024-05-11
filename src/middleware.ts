@@ -25,16 +25,14 @@ const redirectNoPermissions = (url: string) => {
 export default clerkMiddleware(async (auth, req) => {
 	if (!isProtectedRoute(req)) return NextResponse.next();
 
-	if (!isAdminRoute(req)) {
-		throw new Error(`Unhandled route for '${req.url}'`);
-	}
-
 	const { userId } = auth();
 
 	if (!userId) {
 		auth().protect();
 		return NextResponse.next();
 	}
+
+	if (!isAdminRoute(req)) return;
 
 	const userData = await clerkClient.users.getUser(userId);
 
