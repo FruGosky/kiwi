@@ -28,7 +28,7 @@ function NavigationToolbox() {
 			<GithubButton />
 			<AdminDashboardButton />
 			<ThemeToggle />
-			<div className="ms-2 flex">
+			<div className="ms-2">
 				<UserIcon />
 			</div>
 		</Nav>

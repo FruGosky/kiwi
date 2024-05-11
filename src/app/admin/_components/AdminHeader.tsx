@@ -37,7 +37,9 @@ function NavigationToolbox() {
 		<Nav className="items-center gap-0">
 			<StoreFrontButton />
 			<ThemeToggle />
-			<UserIcon />
+			<div className="ms-2">
+				<UserIcon />
+			</div>
 		</Nav>
 	);
 }
