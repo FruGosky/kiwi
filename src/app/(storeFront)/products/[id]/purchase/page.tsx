@@ -11,9 +11,9 @@ type TPurchasePageProps = {
 	};
 };
 
-export default async function PurchasePage(props: TPurchasePageProps) {
+export default async function PurchasePage({ params }: TPurchasePageProps) {
 	const product = await db.product.findUnique({
-		where: { id: props.params.id },
+		where: { id: params.id },
 	});
 
 	if (!product) return notFound();

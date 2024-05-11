@@ -1,3 +1,40 @@
 {
-	"extends": "next/core-web-vitals"
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"node": true
+	},
+	"extends": [
+		"next",
+		"airbnb",
+		"airbnb-typescript",
+		"plugin:import/typescript",
+		"prettier"
+	],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"project": "./tsconfig.json"
+	},
+	"rules": {
+		"import/prefer-default-export": "off",
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"react/require-default-props": "off",
+		"react/jsx-no-useless-fragment": "off",
+		"react/jsx-no-spreading": "off",
+		"react/jsx-props-no-spreading": "off",
+		"react/function-component-definition": "off",
+		"jsx-a11y/heading-has-content": "off",
+		"@typescript-eslint/no-use-before-define": "off",
+		"react/jsx-pascal-case": "off",
+		"no-underscore-dangle": "off",
+		"arrow-body-style": "off",
+		"import/no-extraneous-dependencies": "off",
+		"consistent-return": "off"
+	},
+	"plugins": ["react", "@typescript-eslint", "prettier"]
 }

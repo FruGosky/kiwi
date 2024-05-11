@@ -1,8 +1,8 @@
 import AdminPageName from '@/app/admin/_components/AdminPageName';
-import { ProductForm } from '../../_components/ProductForm';
 import db from '@/db/db';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { ProductForm } from '../../_components/ProductForm';
 
 type TAdminEditProductPageProps = {
 	params: {

@@ -7,11 +7,11 @@ type TAdminLayoutProps = {
 	children: ReactNode;
 };
 
-export default function AdminLayout(props: TAdminLayoutProps) {
+export default function AdminLayout({ children }: TAdminLayoutProps) {
 	return (
 		<>
 			<AdminHeader />
-			<Main>{props.children}</Main>
+			<Main>{children}</Main>
 			<Footer />
 		</>
 	);

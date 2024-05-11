@@ -19,8 +19,8 @@ export async function POST(request: NextRequest) {
 	}
 
 	const charge = event.data.object;
-	const productId = charge.metadata.productId;
-	const email = charge.billing_details.email;
+	const { productId } = charge.metadata;
+	const { email } = charge.billing_details;
 	const priceInCents = charge.amount;
 
 	const product = await db.product.findUnique({

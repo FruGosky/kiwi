@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import AdminPageName from '../_components/AdminPageName';
 import { Button } from '@/components/ui/button';
 import {
 	Table,
@@ -20,6 +19,7 @@ import {
 	formatNumber,
 } from '@/lib/formatters';
 import AvailabilityIcon from '@/components/icons/AvailabilityIcon';
+import AdminPageName from '../_components/AdminPageName';
 import ProductDropdownActions from './_components/ProductDropdownActions';
 
 const getProducts = async () => {

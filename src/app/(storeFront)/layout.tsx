@@ -7,11 +7,11 @@ type TStoreFrontLayoutProps = {
 	children: ReactNode;
 };
 
-export default function StoreFrontLayout(props: TStoreFrontLayoutProps) {
+export default function StoreFrontLayout({ children }: TStoreFrontLayoutProps) {
 	return (
 		<>
 			<StoreFrontHeader />
-			<Main>{props.children}</Main>
+			<Main>{children}</Main>
 			<Footer />
 		</>
 	);

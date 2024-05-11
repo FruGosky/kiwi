@@ -36,7 +36,7 @@ export const addProduct = async (prevState: unknown, formData: FormData) => {
 		return result.error.formErrors.fieldErrors;
 	}
 
-	const data = result.data;
+	const { data } = result;
 
 	await fs.mkdir('public/products', { recursive: true });
 	const imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`;
@@ -77,12 +77,12 @@ export const editProduct = async (
 		return result.error.formErrors.fieldErrors;
 	}
 
-	const data = result.data;
+	const { data } = result;
 	const product = await db.product.findUnique({ where: { id } });
 
 	if (!product) return notFound();
 
-	let imagePath = product.imagePath;
+	let { imagePath } = product;
 	if (data.image && data.image.size > 0) {
 		await fs.unlink(`public${product.imagePath}`);
 		imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`;

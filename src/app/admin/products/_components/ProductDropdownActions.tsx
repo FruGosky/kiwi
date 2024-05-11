@@ -3,16 +3,16 @@
 import DropdownActions, {
 	DropdownActionsItem,
 } from '@/components/DropdownActions';
-import {
-	deleteProduct,
-	toggleProductAvailability,
-} from '../../_actions/products';
 import { Product } from '@prisma/client';
 import {
 	DropdownMenuItem,
 	DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
+import {
+	deleteProduct,
+	toggleProductAvailability,
+} from '../../_actions/products';
 
 type TProductDropdownActionsProps = Pick<
 	Product,

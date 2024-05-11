@@ -38,7 +38,7 @@ export default clerkMiddleware(async (auth, req) => {
 
 	const userData = await clerkClient.users.getUser(userId);
 
-	const userRole = userData.privateMetadata['role'];
+	const userRole = userData.privateMetadata.role;
 	if (typeof userRole !== 'string') {
 		return redirectNoPermissions(req.url);
 	}

@@ -14,11 +14,11 @@ type TPurchaseSuccessPageProps = {
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-export default async function PurchaseSuccessPage(
-	props: TPurchaseSuccessPageProps,
-) {
+export default async function PurchaseSuccessPage({
+	searchParams,
+}: TPurchaseSuccessPageProps) {
 	const paymentIntent = await stripe.paymentIntents.retrieve(
-		props.searchParams.payment_intent,
+		searchParams.payment_intent,
 	);
 
 	if (!paymentIntent.metadata.productId) return notFound();
@@ -55,7 +55,7 @@ export default async function PurchaseSuccessPage(
 					</div>
 					<Button className="mt-4" size="lg" asChild>
 						{isSuccess ? (
-							<Link href={`/products`}>Go back to products</Link>
+							<Link href="/products">Go back to products</Link>
 						) : (
 							<Link href={`/products/${product.id}/purchase`}>
 								Try again

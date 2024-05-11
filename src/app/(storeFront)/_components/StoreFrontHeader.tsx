@@ -30,7 +30,7 @@ function NavigationToolbox() {
 		<Nav className="items-center gap-0">
 			<GithubIcon />
 			<ThemeToggle />
-			<div className="ms-1 flex">
+			<div className="ms-2 flex">
 				<UserIcon />
 			</div>
 		</Nav>

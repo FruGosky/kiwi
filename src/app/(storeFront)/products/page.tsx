@@ -1,13 +1,14 @@
 import ProductCard, { ProductCardSkeleton } from '@/components/ProductCard';
 import db from '@/db/db';
+import { randomUUID } from 'crypto';
 import { Suspense } from 'react';
 
 export default function ProductsPage() {
 	return (
 		<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 			<Suspense
-				fallback={Array.from({ length: 8 }).map((_, idx) => (
-					<ProductCardSkeleton key={idx} />
+				fallback={Array.from({ length: 8 }).map(() => (
+					<ProductCardSkeleton key={randomUUID()} />
 				))}
 			>
 				<Products />

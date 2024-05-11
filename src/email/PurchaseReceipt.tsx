@@ -22,6 +22,28 @@ type TPurchaseReceiptProps = {
 	};
 };
 
+export default function PurchaseReceipt({
+	product,
+	order,
+}: TPurchaseReceiptProps) {
+	return (
+		<Html>
+			<Preview>
+				You have successfully bought {product.name} view receipt
+			</Preview>
+			<Tailwind>
+				<Head />
+				<Body className="bg-white font-sans">
+					<Container className="max-w-xl">
+						<Heading>Purchase Receipt</Heading>
+						<OrderInformation order={order} product={product} />
+					</Container>
+				</Body>
+			</Tailwind>
+		</Html>
+	);
+}
+
 PurchaseReceipt.PreviewProps = {
 	product: {
 		name: 'Product name',
@@ -35,25 +57,3 @@ PurchaseReceipt.PreviewProps = {
 		priceInCents: 10000,
 	},
 } satisfies TPurchaseReceiptProps;
-
-export default function PurchaseReceipt(props: TPurchaseReceiptProps) {
-	return (
-		<Html>
-			<Preview>
-				You have successfully bought {props.product.name} view receipt
-			</Preview>
-			<Tailwind>
-				<Head />
-				<Body className="bg-white font-sans">
-					<Container className="max-w-xl">
-						<Heading>Purchase Receipt</Heading>
-						<OrderInformation
-							order={props.order}
-							product={props.product}
-						/>
-					</Container>
-				</Body>
-			</Tailwind>
-		</Html>
-	);
-}

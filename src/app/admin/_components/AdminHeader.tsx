@@ -24,9 +24,6 @@ export default function AdminHeader() {
 				</div>
 				<div className="flex flex-1 items-center justify-end gap-2">
 					<NavigationToolbox />
-					<div className="ms-1 flex">
-						<UserButton />
-					</div>
 				</div>
 			</div>
 		</header>
@@ -35,9 +32,12 @@ export default function AdminHeader() {
 
 function NavigationToolbox() {
 	return (
-		<Nav className="gap-0">
+		<Nav className="items-center gap-0">
 			<StoreFrontIcon />
 			<ThemeToggle />
+			<div className="ms-2 flex">
+				<UserButton />
+			</div>
 		</Nav>
 	);
 }

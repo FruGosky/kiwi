@@ -1,8 +1,8 @@
 import DashboardCard from '@/components/DashboardCard';
 import db from '@/db/db';
 import { formatCurrency, formatNumber } from '@/lib/formatters';
-import AdminPageName from './_components/AdminPageName';
 import { Metadata } from 'next';
+import AdminPageName from './_components/AdminPageName';
 
 const getSales = async () => {
 	const orderData = await db.order.aggregate({
