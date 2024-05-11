@@ -1,10 +1,26 @@
 'use client';
 
 import * as React from 'react';
-import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
+import dynamic from 'next/dynamic';
 import TooltipWrapper from './TooltipWrapper';
+import { Skeleton } from './ui/skeleton';
+
+// Dynamic import's to prevent hydration
+const Sun = dynamic(() => import('lucide-react').then((module) => module.Sun), {
+	loading: () => <Skeleton className="h-[1.2rem] w-[1.2rem] rounded-full" />,
+	ssr: false,
+});
+const Moon = dynamic(
+	() => import('lucide-react').then((module) => module.Moon),
+	{
+		loading: () => (
+			<Skeleton className="h-[1.2rem] w-[1.2rem] rounded-full" />
+		),
+		ssr: false,
+	},
+);
 
 export default function ThemeToggle() {
 	const { theme, setTheme } = useTheme();
