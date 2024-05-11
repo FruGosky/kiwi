@@ -11,8 +11,8 @@ export default function ProductPreview({
 	description,
 }: TProductPreviewProps) {
 	return (
-		<div className="flex items-center gap-4">
-			<div className="relative aspect-video w-1/3 flex-shrink-0">
+		<div className="flex flex-col items-center gap-4 sm:flex-row">
+			<div className="relative aspect-video w-full flex-shrink-0 sm:w-1/3">
 				<Image
 					src={imagePath}
 					alt={name}
