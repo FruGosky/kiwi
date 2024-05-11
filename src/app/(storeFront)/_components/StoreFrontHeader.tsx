@@ -4,6 +4,7 @@ import { navPaths } from '@/config/availablePaths';
 import Logo from '@/components/buttons/Logo';
 import UserIcon from '@/components/buttons/UserIcon';
 import GithubButton from '@/components/buttons/GithubButton';
+import AdminDashboardButton from '@/components/buttons/AdminDashboardButton';
 
 export default function StoreFrontHeader() {
 	return (
@@ -25,6 +26,7 @@ function NavigationToolbox() {
 	return (
 		<Nav className="items-center gap-0">
 			<GithubButton />
+			<AdminDashboardButton />
 			<ThemeToggle />
 			<div className="ms-2 flex">
 				<UserIcon />

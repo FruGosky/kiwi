@@ -7,7 +7,7 @@ import { navPaths } from '@/config/availablePaths';
 
 export default function StoreFrontButton() {
 	return (
-		<TooltipWrapper text="Back to Store Front">
+		<TooltipWrapper text="Store Front">
 			<Link
 				href={navPaths.storeFront[0].href}
 				rel="noreferrer"

@@ -11,7 +11,7 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 const isAdminRoute = createRouteMatcher(['/admin(.*)']);
 
-const rolesAllowedToAdminRoutes = ['admin'];
+export const rolesAllowedToAdminRoutes = ['admin'];
 
 const redirectNoPermissions = (url: string) => {
 	const redirectUrl = new URL('/', url);
