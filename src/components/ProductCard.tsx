@@ -29,15 +29,19 @@ export default function ProductCard({
 	return (
 		<Card className="flex flex-col overflow-hidden">
 			<div className="relative aspect-video h-auto w-full bg-secondary">
-				<Image
-					src={imagePath}
-					alt={name}
-					fill
-					style={{ objectFit: 'contain' }}
-				/>
+				<Link href={`/products/${id}`}>
+					<Image
+						src={imagePath}
+						alt={name}
+						fill
+						style={{ objectFit: 'contain' }}
+					/>
+				</Link>
 			</div>
 			<CardHeader>
-				<CardTitle>{name}</CardTitle>
+				<CardTitle>
+					<Link href={`/products/${id}`}>{name}</Link>
+				</CardTitle>
 				<CardDescription>
 					{formatCurrency(priceInCents / 100)}
 				</CardDescription>

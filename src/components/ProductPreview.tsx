@@ -2,9 +2,12 @@ import { formatCurrency } from '@/lib/formatters';
 import { Product } from '@prisma/client';
 import Image from 'next/image';
 
-type TProductPreviewProps = Product;
+type TProductPreviewProps = Pick<
+	Product,
+	'name' | 'imagePath' | 'description' | 'priceInCents'
+>;
 
-export default function ProductPreview({
+export default function ProductRowPreview({
 	name,
 	priceInCents,
 	imagePath,
@@ -20,11 +23,11 @@ export default function ProductPreview({
 					style={{ objectFit: 'scale-down' }}
 				/>
 			</div>
-			<div>
-				<div className="text-lg">
+			<div className="flex flex-col gap-1">
+				<h2 className="text-2xl font-bold">{name}</h2>
+				<div className="mb-2 text-lg">
 					{formatCurrency(priceInCents / 100)}
 				</div>
-				<h1 className="text-2xl font-bold">{name}</h1>
 				<div className="line-clamp-3 text-muted-foreground">
 					{description}
 				</div>
