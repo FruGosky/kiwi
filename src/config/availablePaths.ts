@@ -1,4 +1,5 @@
 import { TNavPath } from '@/components/Nav';
+import { createRouteMatcher } from '@clerk/nextjs/server';
 
 type TAvailableSites = 'storeFront' | 'admin';
 
@@ -32,3 +33,10 @@ export const navPaths: Record<TAvailableSites, TNavPath[]> = {
 		},
 	],
 };
+
+export const isProtectedRoute = createRouteMatcher([
+	'/admin(.*)',
+	'/products/(.*)/purchase',
+]);
+
+export const isAdminRoute = createRouteMatcher(['/admin(.*)']);
