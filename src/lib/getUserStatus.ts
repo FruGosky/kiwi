@@ -1,13 +1,15 @@
 import { rolesAllowedToAdminRoutes } from '@/config/roles';
-import { auth } from '@clerk/nextjs/server';
+import { auth, ClerkMiddlewareAuth } from '@clerk/nextjs/server';
 
 type TUserStatus = {
 	isLoggedIn: boolean;
 	isAdmin: boolean;
 };
 
-export const getUserStatus = (): TUserStatus => {
-	const { sessionClaims } = auth();
+export const getUserStatus = (
+	middlewareAuth?: ClerkMiddlewareAuth,
+): TUserStatus => {
+	const { sessionClaims } = (middlewareAuth ?? auth)();
 
 	const userStatus = {
 		isLoggedIn: false,

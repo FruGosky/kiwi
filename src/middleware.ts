@@ -15,7 +15,7 @@ const redirectNoPermissions = (url: string) => {
 export default clerkMiddleware(async (auth, req) => {
 	if (!isProtectedRoute(req)) return NextResponse.next();
 
-	const { isLoggedIn, isAdmin } = getUserStatus();
+	const { isLoggedIn, isAdmin } = getUserStatus(auth);
 
 	if (!isLoggedIn) {
 		auth().protect();
